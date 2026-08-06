@@ -61,10 +61,30 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
 - **Accessibility (A11y)**:
   - Elemen interaktif WAJIB accessible (ARIA labels, keyboard navigation focus states, semantic HTML tags `<main>`, `<nav>`, `<article>`, `<header>`).
 
-## 6. Error Handling & Security Guardrails
-- **No Silent Try-Catch / Swallowing Errors**: Dilarang menangkap error dengan `try-catch` kosong atau me-return data dummy tanpa mencatat (*logging*) error yang jelas.
-- **Unified Error Handler**: Backend WAJIB menggunakan Centralized Error Handler (misal: `app.onError` di Hono) dan mengembalikan status code HTTP yang sesuai (400, 401, 403, 404, 500).
-- **OWASP Top 10 Guardrails**: Dilarang menyimpan password mentah (wajib Argon2/Bcrypt), pastikan CORS dikonfigurasi secara ketat (*no wildcard `*` in production*), dan terapkan Rate Limiting di endpoint sensitif (Auth, Payment).
+## 6. Zero-Trust Security & OWASP Top 10 Defensive Guardrails
+- **Authentication & Password Security**:
+  - Dilarang menyimpan password/token mentah. Password WAJIB di-hash menggunakan **Argon2id** (pilihan utama) atau **Bcrypt (cost factor ≥ 12)**.
+  - JWT Session WAJIB ditandatangani dengan algoritma kuat (`HS256`/`RS256`), masa berlaku pendek (max 15-60 menit), dan disimpan di **HttpOnly, Secure, SameSite=Strict/Lax Cookie** (DILARANG menyimpan JWT di `localStorage` / `sessionStorage` untuk mencegah XSS token theft).
+- **Broken Access Control & IDOR Prevention**:
+  - Setiap query/endpoint data sensitif (misal: `/api/orders/:id`) WAJIB memverifikasi kepemilikan data (Object-Level Authorization): `WHERE order.id = :id AND order.user_id = :current_user_id`. Dilarang mengandalkan ID dari client tanpa validasi session server.
+- **SQL Injection (SQLi) & NoSQLi Protection**:
+  - Dilarang keras menggunakan *Raw String Interpolation* atau *Concatenation* dalam query SQL (misal: `` `SELECT * FROM users WHERE email = '${email}'` ``).
+  - Pembacaan & penulisan WAJIB melalui Drizzle ORM Parametrized Queries atau Prepared Statements.
+- **XSS (Cross-Site Scripting) & Content Security Policy (CSP)**:
+  - Gunakan `helmet` / Hono `secureHeaders()` middleware untuk memasang **Security Headers**: `Content-Security-Policy` (CSP), `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, dan `Referrer-Policy`.
+  - Sanitasi semua HTML output yang di-render dari input user (gunakan DOMPurify / sanitize-html). Dilarang `dangerouslySetInnerHTML` tanpa sanitasi ketat.
+- **CSRF (Cross-Site Request Forgery) & CORS Tightening**:
+  - Terapkan **CSRF Protection Middleware** (Anti-CSRF Tokens atau SameSite Cookies) untuk semua state-changing request (POST, PUT, DELETE, PATCH).
+  - CORS WAJIB dikunci ke domain spesifik yang di-whitelisted via `.env`. **DILARANG keras menggunakan `Access-Control-Allow-Origin: *` di production**.
+- **SSRF (Server-Side Request Forgery) & Input Sanitization**:
+  - Jika API melakukan fetching ke URL eksternal berdasarkan input user, WAJIB memvalidasi URL terhadap IP Private / Loopback Whitelist (`127.0.0.1`, `10.0.0.0/8`, `192.168.0.0/16`, `metadata.google.internal`) untuk mencegah SSRF & Cloud Metadata Leak.
+- **Rate Limiting & Anti-Brute Force / DoS**:
+  - Terapkan Rate Limiting (misal: Hono Rate Limiter / Redis Slide Window) pada **semua endpoint public** (max 100 req/min) dan **endpoint sensitif Auth/Payment** (max 5-10 req/min) untuk mencegah Brute-Force & Credential Stuffing.
+- **Secret Management & Zero Hardcoded Credentials**:
+  - DILARANG keras meletakkan API Keys, DB Passwords, JWT Secrets, atau Private Keys di dalam source code.
+  - Semua secret WAJIB divalidasi via Zod Schema di `src/env.ts` dan dipindai secara otomatis sebelum commit (`gitleaks` / pre-commit hook).
+- **Audit Logging & Error Masking**:
+  - Detail internal stack trace (misal: DB error message, file paths) **DILARANG dibocorkan ke HTTP Client**. Kembalikan pesan error generik (misal: "Internal Server Error") ke client, dan catat detail traceback asli HANYA di server log terenkripsi (Sentry / Structured JSON Log).
 
 ## 7. Database Naming & Migration Rules
 - **Naming Convention**: Gunakan `snake_case` untuk nama tabel dan kolom di database (misal: `user_profiles`, `created_at`).
