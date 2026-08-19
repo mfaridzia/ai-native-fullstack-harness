@@ -24,7 +24,8 @@ Boilerplate ini dirancang khusus untuk mempermudah pembuatan aplikasi web fullst
 
 ### 🧠 Dual-Engine AI Architecture (`.agents/` & `.claude/`)
 - **12 Master Subagents**: UI/UX Designer, Code Reviewer, PM, Architect, Backend, Frontend, Fullstack, DB Specialist, QA/Security, SEO, A11y, DevOps.
-- **11 Universal Skills**: Production-grade procedures with YAML Frontmatter.
+- **12 Universal Skills**: Production-grade procedures with YAML Frontmatter (Termasuk `skill-automated-testing`, `skill-e2e-testing`, `skill-security-audit`, dll).
+- **Mandatory Automated Testing & Coverage**: Wajib Unit/Integration/Component test (Vitest) dengan threshold coverage **≥80%** (general/components) & **≥90%** (critical/auth), serta E2E test (Playwright).
 - **Auto-Managed Memory (`MEMORY.md`)**: Anti-amnesia AI engine yang melacak progress & ADR secara otomatis.
 - **Scratchpad Isolation (`scratch/`)**: Folder terisolasi untuk eksperimen kode AI tanpa mengotori `src/`.
 
@@ -36,7 +37,7 @@ Boilerplate ini dirancang khusus untuk mempermudah pembuatan aplikasi web fullst
 my-project/
 ├── .agents/                           # 🚀 Google Antigravity CLI Native Directory
 │   ├── agents/                        # 12 Subagent Roles (.agents/agents/<name>.md)
-│   └── skills/                        # 11 Skills Procedures (.agents/skills/<folder>/SKILL.md)
+│   └── skills/                        # 12 Skills Procedures (.agents/skills/<folder>/SKILL.md)
 ├── .claude/                           # 🚀 Claude Code CLI Native Directory
 │   ├── agents -> ../.agents/agents    # Symlink to Antigravity agents
 │   └── skills -> ../.agents/skills    # Symlink to Antigravity skills
