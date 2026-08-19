@@ -62,11 +62,14 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
   - Elemen interaktif WAJIB accessible (ARIA labels, keyboard navigation focus states, semantic HTML tags `<main>`, `<nav>`, `<article>`, `<header>`).
 
 ## 6. Mandatory Automated Testing Rule (Unit, Integration & E2E)
-- **Zero Untested Business Logic**:
+- **Zero Untested Business Logic & Components**:
   - Setiap penambahan service, util/helper function, atau endpoint API baru WAJIB disertai minimal **Unit / Integration Test (Vitest)**.
+  - **Frontend UI & Shared Components Wajib Di-test**:
+    - Seluruh **Shared / Design System Components** (`src/components/ui/`, `src/components/`) WAJIB memiliki Unit / Component Test (Vitest + React Testing Library) untuk menguji rendering, props variant, user events (click, input), dan accessibility state.
+    - Complex feature components (Form modal, multi-step wizards, interactive data tables) WAJIB dilindungi oleh integration component test.
   - Setiap alur user flow kritis (Auth, Checkout/Payment, Onboarding) WAJIB dilindungi oleh **End-to-End Test (Playwright)**.
 - **Minimum Code Coverage Threshold**:
-  - **Global / Shared Utils & Services**: Minimal **≥ 80%** test coverage (*Lines, Branches, Functions, Statements*).
+  - **Global / Shared UI Components, Utils & Services**: Minimal **≥ 80%** test coverage (*Lines, Branches, Functions, Statements*).
   - **Critical Modules (Auth, Payment/Checkout, Security/RBAC)**: Minimal **≥ 90%** test coverage.
   - Test runner WAJIB meng-enforce threshold via konfigurasi coverage (misal: `vitest.config.ts` -> `coverage.thresholds`).
 - **TDD / Test-Alongside Development**:
