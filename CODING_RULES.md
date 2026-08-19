@@ -61,7 +61,22 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
 - **Accessibility (A11y)**:
   - Elemen interaktif WAJIB accessible (ARIA labels, keyboard navigation focus states, semantic HTML tags `<main>`, `<nav>`, `<article>`, `<header>`).
 
-## 6. Zero-Trust Security & OWASP Top 10 Defensive Guardrails
+## 6. Mandatory Automated Testing Rule (Unit, Integration & E2E)
+- **Zero Untested Business Logic**:
+  - Setiap penambahan service, util/helper function, atau endpoint API baru WAJIB disertai minimal **Unit / Integration Test (Vitest)**.
+  - Setiap alur user flow kritis (Auth, Checkout/Payment, Onboarding) WAJIB dilindungi oleh **End-to-End Test (Playwright)**.
+- **Minimum Code Coverage Threshold**:
+  - **Global / Shared Utils & Services**: Minimal **≥ 80%** test coverage (*Lines, Branches, Functions, Statements*).
+  - **Critical Modules (Auth, Payment/Checkout, Security/RBAC)**: Minimal **≥ 90%** test coverage.
+  - Test runner WAJIB meng-enforce threshold via konfigurasi coverage (misal: `vitest.config.ts` -> `coverage.thresholds`).
+- **TDD / Test-Alongside Development**:
+  - Tulis test case bersamaan atau sebelum mengimplementasikan fitur (Edge cases, Happy paths, Error boundaries).
+- **No Skipping or Disabling Tests**:
+  - Dilarang keras mengomentari (*comment-out*), menghapus, atau mengabaikan (`test.skip`, `it.skip`) test yang failing untuk meloloskan build/CI tanpa investigasi akar masalah.
+- **Pre-Commit / Pre-PR Test Verification**:
+  - Seluruh test suite (`bun test` / `vitest run` & `playwright test`) WAJIB passing 100% dan memenuhi target coverage sebelum kode dianggap selesai dan di-commit.
+
+## 7. Zero-Trust Security & OWASP Top 10 Defensive Guardrails
 - **Authentication & Password Security**:
   - Dilarang menyimpan password/token mentah. Password WAJIB di-hash menggunakan **Argon2id** (pilihan utama) atau **Bcrypt (cost factor ≥ 12)**.
   - JWT Session WAJIB ditandatangani dengan algoritma kuat (`HS256`/`RS256`), masa berlaku pendek (max 15-60 menit), dan disimpan di **HttpOnly, Secure, SameSite=Strict/Lax Cookie** (DILARANG menyimpan JWT di `localStorage` / `sessionStorage` untuk mencegah XSS token theft).
@@ -86,14 +101,10 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
 - **Audit Logging & Error Masking**:
   - Detail internal stack trace (misal: DB error message, file paths) **DILARANG dibocorkan ke HTTP Client**. Kembalikan pesan error generik (misal: "Internal Server Error") ke client, dan catat detail traceback asli HANYA di server log terenkripsi (Sentry / Structured JSON Log).
 
-## 7. Database Naming & Migration Rules
+## 8. Database Naming & Migration Rules
 - **Naming Convention**: Gunakan `snake_case` untuk nama tabel dan kolom di database (misal: `user_profiles`, `created_at`).
 - **Migration Safeguard**: Dilarang mengubah file migrasi SQL yang sudah di-commit/dijalankan di production. Selalu buat file migrasi baru via `drizzle-kit generate`.
 - **Soft Delete Pattern**: Untuk data penting (User, Transaction, Order), rekomendasikan kolom `deleted_at: timestamp` daripada hard DELETE fisik.
-
-## 8. Automated Testing Guardrails
-- **Unit & Integration Test**: Setiap service/helper function baru dengan logika kompleks WAJIB disertai Unit Test (Vitest).
-- **No Skipping Tests**: Dilarang mengomentari (*comment-out*) atau mengabaikan (`test.skip`) test yang failing tanpa alasan teknis dan persetujuan eksplisit.
 
 ## 9. Memory Auto-Update Rule
 Di akhir setiap sesi penyelesaian tugas, AI WAJIB memperbarui file `MEMORY.md` dengan status progress terbaru, keputusan arsitektur (ADR) baru, dan daftar next steps.

@@ -1,0 +1,79 @@
+---
+name: skill-automated-testing
+description: "Prosedur penulisan Unit & Integration Test (Vitest), mocking API/DB, dan audit code coverage threshold (≥80%-90%)."
+---
+
+# Skill Procedure: Automated Unit & Integration Testing (Vitest)
+
+Gunakan skill ini setiap kali membuat atau memodifikasi service, util function, atau API route untuk memastikan stabilitas dan pemenuhan coverage threshold.
+
+---
+
+## 1. Standar Coverage Threshold
+- **Global / Services / Utils**: Minimal **≥ 80%** (*Lines, Statements, Functions, Branches*).
+- **Critical Modules (Auth, Payment/Checkout, Security/RBAC)**: Minimal **≥ 90%** test coverage.
+
+---
+
+## 2. Struktur File & Penempatan Test
+- Simpan file unit test berdampingan dengan file implementasi atau di subdirektori `__tests__/`:
+  - `src/modules/auth/auth.service.ts` -> `src/modules/auth/auth.service.test.ts`
+  - `src/utils/format.ts` -> `src/utils/format.test.ts`
+- Gunakan ekstensi `*.test.ts` atau `*.spec.ts`.
+
+---
+
+## 3. Pola Pengujian (Test Patterns)
+
+### A. Testing Service / Business Logic Murni
+```ts
+import { describe, it, expect } from "vitest";
+import { calculateDiscount } from "./discount.service";
+
+describe("calculateDiscount", () => {
+  it("should apply 10% discount for regular members", () => {
+    const result = calculateDiscount(100000, "REGULAR");
+    expect(result).toBe(90000);
+  });
+
+  it("should throw error on negative amount (Edge Case)", () => {
+    expect(() => calculateDiscount(-100, "REGULAR")).toThrowError("Invalid amount");
+  });
+});
+```
+
+### B. Testing Hono API Endpoint (Integration Test tanpa Server Nyala)
+```ts
+import { describe, it, expect } from "vitest";
+import { app } from "@/app";
+
+describe("POST /api/auth/login", () => {
+  it("should return 400 when body fails Zod validation", async () => {
+    const res = await app.request("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ email: "invalid-email" }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.success).toBe(false);
+  });
+});
+```
+
+---
+
+## 4. Eksekusi & Audit Coverage
+1. Jalankan test suite:
+   ```bash
+   bun test
+   # atau
+   npx vitest run
+   ```
+2. Jalankan test dengan coverage report:
+   ```bash
+   npx vitest run --coverage
+   ```
+3. Jika coverage di bawah target (80% / 90%), identifikasi missing lines/branches pada report lalu tambahkan test case untuk edge-cases tersebut.
+4. **DILARANG keras menggunakan `test.skip` atau mengomentari test yang gagal**.

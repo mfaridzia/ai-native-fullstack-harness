@@ -9,9 +9,12 @@
 ## 📐 Architecture Decision Records (ADR)
 - **ADR-001**: Menggunakan Hono.js dibanding Express karena Type-Safety RPC & performa Edge.
 - **ADR-002**: Menggunakan Drizzle ORM dibanding Prisma untuk zero-overhead SQL performance.
+- **ADR-003**: Menetapkan Mandatory Automated Testing Rule (Unit, Integration Vitest & E2E Playwright) dengan threshold coverage minimal **≥ 80%** (global/services) dan **≥ 90%** (critical/auth/payment modules), serta melengkapi skill `skill-automated-testing`.
 
 ## 🐛 Known Issues & Technical Debts
 - None yet.
 
 ## 🎯 Next Immediate Steps
 - [ ] Initialize frontend & backend codebase.
+
+
