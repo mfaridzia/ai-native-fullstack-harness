@@ -15,11 +15,14 @@ Gunakan skill ini setiap kali membuat atau memodifikasi service, util function, 
 
 ---
 
-## 2. Struktur File & Penempatan Test
-- Simpan file unit test berdampingan dengan file implementasi atau di subdirektori `__tests__/`:
-  - `src/modules/auth/auth.service.ts` -> `src/modules/auth/auth.service.test.ts`
-  - `src/utils/format.ts` -> `src/utils/format.test.ts`
-- Gunakan ekstensi `*.test.ts` atau `*.spec.ts`.
+## 2. Struktur File & Penempatan Test (Strict Co-location Rule)
+- **WAJIB Co-location**: Simpan file unit/component test **persis berdampingan** dengan file implementasinya:
+  - Backend Service: `src/modules/auth/auth.service.ts` -> `src/modules/auth/auth.service.test.ts`
+  - Backend Route: `src/modules/auth/auth.route.ts` -> `src/modules/auth/auth.route.test.ts`
+  - UI Component: `src/components/ui/button.tsx` -> `src/components/ui/button.test.tsx`
+  - Util / Helper: `src/utils/format.ts` -> `src/utils/format.test.ts`
+- Gunakan ekstensi `*.test.ts` atau `*.test.tsx`.
+- **Dilarang** membuat folder test unit terpisah di luar `src/` (misal: `tests/unit/`) agar domain encapsulation tetap utuh.
 
 ---
 

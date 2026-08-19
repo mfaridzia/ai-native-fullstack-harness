@@ -68,6 +68,13 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
     - Seluruh **Shared / Design System Components** (`src/components/ui/`, `src/components/`) WAJIB memiliki Unit / Component Test (Vitest + React Testing Library) untuk menguji rendering, props variant, user events (click, input), dan accessibility state.
     - Complex feature components (Form modal, multi-step wizards, interactive data tables) WAJIB dilindungi oleh integration component test.
   - Setiap alur user flow kritis (Auth, Checkout/Payment, Onboarding) WAJIB dilindungi oleh **End-to-End Test (Playwright)**.
+- **Test Organization & Placement Strategy (Co-location vs Centralized)**:
+  - **Co-location Pattern (Wajib untuk Unit, Service & Component Tests)**:
+    - Seluruh file test unit/komponen WAJIB diletakkan **persis berdampingan** dengan file implementasinya (`*.test.ts` / `*.test.tsx`).
+    - Contoh: `src/modules/auth/auth.service.ts` berdampingan dengan `src/modules/auth/auth.service.test.ts`, `src/components/ui/button.tsx` berdampingan dengan `src/components/ui/button.test.tsx`.
+    - *Tujuan*: Mempertahankan domain encapsulation, memudahkan refactor, dan mengoptimalkan context awareness untuk AI Assistant.
+  - **Centralized Pattern (Wajib untuk E2E & Cross-Module Journey)**:
+    - Seluruh file Playwright E2E WAJIB disimpan terpusat di root folder `e2e/` (misal: `e2e/auth-flow.spec.ts`, `e2e/checkout-flow.spec.ts`).
 - **Minimum Code Coverage Threshold**:
   - **Global / Shared UI Components, Utils & Services**: Minimal **≥ 80%** test coverage (*Lines, Branches, Functions, Statements*).
   - **Critical Modules (Auth, Payment/Checkout, Security/RBAC)**: Minimal **≥ 90%** test coverage.
