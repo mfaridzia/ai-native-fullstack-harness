@@ -8,6 +8,7 @@
 ![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-100%25_Type_Safe-green.svg)
 ![Google Antigravity](https://img.shields.io/badge/Google_Antigravity-Compatible-4285F4.svg)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-D97706.svg)
+![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-Compatible-00A67E.svg)
 ![Spec-Driven Development](https://img.shields.io/badge/SDD-Spec--Driven_Development-success.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -124,6 +125,11 @@ rm -rf .git && git init
   ```bash
   claude
   ```
+* **OpenAI Codex**:
+  ```bash
+  codex
+  ```
+
 
 ### 3. Lempar Ide Fitur Pertama Anda
 Cukup berikan ide bisnis Anda ke AI Utama (Orchestrator):
