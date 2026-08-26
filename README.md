@@ -25,7 +25,7 @@ Repositori ini adalah **"Sistem Otak, Tata Kelola & Pabrik"** bagi AI Coding Ass
 | :--- | :--- | :--- |
 | **Bentuk** | Template kode statis yang sudah terinstall. | Sistem tata kelola, aturan ketat (*guardrails*), subagents, dan pipeline SDD. |
 | **Fleksibilitas Stack** | Kaku (terkunci pada 1 framework sejak awal). | **Adaptif**: Menghasilkan arsitektur Decoupled (Vite + Hono) atau Unified (Next.js), Bun atau Node.js sesuai intake proyek. |
-| **Kualitas Kode AI** | *Vibe coding* tanpa arah, rentan halusinasi & regresi. | **Spec-Driven**: Wajib PRD $ightarrow$ Tech Plan $ightarrow$ Dependency Tasks $ightarrow$ Automated Tests $\ge 80\%$. |
+| **Kualitas Kode AI** | *Vibe coding* tanpa arah, rentan halusinasi & regresi. | **Spec-Driven**: Wajib PRD → Tech Plan → Dependency Tasks → Automated Tests ≥ 80%. |
 | **Kolaborasi AI** | 1 AI serabutan mengerjakan segalanya. | **12 Subagent Spesialis** dengan batasan peran ketat (*strict boundaries*). |
 
 ---
@@ -130,9 +130,9 @@ Cukup berikan ide bisnis Anda ke AI Utama (Orchestrator):
 > *"Saya mau membuat MVP SaaS Point of Sale (POS) untuk kedai kopi. Di tahap awal ini, saya butuh fitur Kasir: memilih menu katalog, memilih varian/add-on, kalkulasi pajak, dan bayar QRIS. Tolong proses fitur ini lewat Spec-Driven Development."*
 
 AI akan secara otomatis:
-1. Memanggil **PM** $ightarrow$ Membuat PRD di `.ai/specs/features/pos-cashier.md`.
-2. Memanggil **Architect** $ightarrow$ Merancang DB/API di `.ai/plans/pos-cashier-plan.md` & task di `.ai/tasks/pos-cashier-tasks.md`.
-3. Menunggu approval Anda $ightarrow$ Mengeksekusi kode secara bertahap (DB $ightarrow$ BE $ightarrow$ FE $ightarrow$ QA).
+1. Memanggil **PM** → Membuat PRD di `.ai/specs/features/pos-cashier.md`.
+2. Memanggil **Architect** → Merancang DB/API di `.ai/plans/pos-cashier-plan.md` & task di `.ai/tasks/pos-cashier-tasks.md`.
+3. Menunggu approval Anda → Mengeksekusi kode secara bertahap (DB → BE → FE → QA).
 4. Menjalankan seluruh test suite dan memperbarui `MEMORY.md`.
 
 ---
