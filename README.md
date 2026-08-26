@@ -9,6 +9,7 @@
 ![Google Antigravity](https://img.shields.io/badge/Google_Antigravity-Compatible-4285F4.svg)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-D97706.svg)
 ![Spec-Driven Development](https://img.shields.io/badge/SDD-Spec--Driven_Development-success.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
@@ -144,4 +145,5 @@ AI akan secara otomatis:
 ---
 
 ## 📄 License
-Tambahkan file `LICENSE` sesuai kebutuhan lisensi distribusi proyek Anda (misal: MIT License).
+
+Didistribusikan di bawah lisensi **MIT License**. Lihat [`LICENSE`](file:///Users/muhfaridzia/Documents/personal/ai-fullstack-boilerplate/LICENSE) untuk informasi lebih lanjut. Bebas digunakan untuk proyek personal maupun komersial!
