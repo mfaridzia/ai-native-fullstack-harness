@@ -110,7 +110,7 @@ my-project/
 
 ### 1. Clone Repositori
 ```bash
-git clone https://github.com/mfaridzia/ai-fullstack-boilerplate.git my-awesome-app
+git clone https://github.com/mfaridzia/ai-native-fullstack-engineering-harness.git my-awesome-app
 cd my-awesome-app
 rm -rf .git && git init
 ```
