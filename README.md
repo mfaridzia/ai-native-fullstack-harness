@@ -1,34 +1,59 @@
-# 🚀 Universal AI-Native Fullstack Boilerplate
+# 🚀 AI-Native Fullstack Engineering Harness
+### *Universal Spec-Driven Multi-Agent Framework & Meta-Boilerplate*
 
-> **Enterprise-Grade Architecture Blueprint for Google Antigravity & Claude Code CLI**
+> **Enterprise-Grade AI Governance & Architecture Harness for Google Antigravity CLI, Claude Code CLI, & OpenAI Codex**
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)
 ![Hono.js](https://img.shields.io/badge/Hono.js-Ultra_Fast-orange.svg)
 ![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-100%25_Type_Safe-green.svg)
 ![Google Antigravity](https://img.shields.io/badge/Google_Antigravity-Compatible-4285F4.svg)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-D97706.svg)
-
-Boilerplate ini adalah adaptive AI engineering harness untuk memulai aplikasi web fullstack modern. Arsitektur coupled/decoupled, runtime Bun/Node.js, package manager, dan database dipilih saat project intake lalu dicatat dalam ADR, `MEMORY.md`, dan `.ai/project-state.md` agar seluruh agent memakai profile yang konsisten.
+![Spec-Driven Development](https://img.shields.io/badge/SDD-Spec--Driven_Development-success.svg)
 
 ---
 
-## 📌 Features & Tech Stack
+## 💡 Apa Sebenarnya Repositori Ini?
 
-### 🎨 Tech Stack Summary
-- **Frontend**: React 18+ (Vite + TanStack Router & Query) ATAU Next.js 14+ App Router.
-- **Backend API**: Hono.js (Stateless, Ultra-Fast REST/RPC).
-- **ORM & Database**: Drizzle ORM dengan SQLite (Turso) atau PostgreSQL (Neon/Supabase).
-- **Validation**: Zod (100% Type-Safe dari API Request hingga Environment Variables).
-- **Testing**: Vitest (Unit/Integration) & Playwright (E2E).
-- **Observability**: Sentry Error Tracking & Structured JSON Logging.
+Repositori ini **bukan sekadar code boilerplate biasa** (yang berisi template kode statis kaku), melainkan sebuah **Adaptive AI Engineering Harness & Meta-Boilerplate**.
 
-### 🧠 Dual-Engine AI Architecture (`.agents/` & `.claude/`)
-- **12 Master Subagents**: UI/UX Designer, Code Reviewer, PM, Architect, Backend, Frontend, Fullstack, DB Specialist, QA/Security, SEO, A11y, DevOps.
-- **12 Universal Skills**: Production-grade procedures with YAML Frontmatter (Termasuk `skill-automated-testing`, `skill-e2e-testing`, `skill-security-audit`, dll).
-- **Mandatory Automated Testing & Coverage**: Wajib Unit/Integration/Component test (Vitest) dengan threshold coverage **≥80%** (general/components) & **≥90%** (critical/auth), serta E2E test (Playwright).
-- **Auto-Managed Memory (`MEMORY.md`)**: Anti-amnesia AI engine yang melacak progress & ADR secara otomatis.
-- **Scratchpad Isolation (`scratch/`)**: Folder terisolasi untuk eksperimen kode AI tanpa mengotori `src/`.
-- **Spec-Driven Workflow (`.ai/`)**: PRD, plan, dependency-ordered tasks, ADR, approval gates, dan active project state.
+Repositori ini adalah **"Sistem Otak, Tata Kelola & Pabrik"** bagi AI Coding Assistant (Antigravity, Claude Code, Codex, Cursor) agar mampu bekerja sebagai **Tim Software Engineer Profesional** yang terstruktur, aman, dan disiplin tinggi.
+
+### ⚖️ Mengapa Harness Ini Lebih Unggul dibanding Traditional Boilerplate?
+
+| Aspek | Traditional Boilerplate | AI-Native Engineering Harness |
+| :--- | :--- | :--- |
+| **Bentuk** | Template kode statis yang sudah terinstall. | Sistem tata kelola, aturan ketat (*guardrails*), subagents, dan pipeline SDD. |
+| **Fleksibilitas Stack** | Kaku (terkunci pada 1 framework sejak awal). | **Adaptif**: Menghasilkan arsitektur Decoupled (Vite + Hono) atau Unified (Next.js), Bun atau Node.js sesuai intake proyek. |
+| **Kualitas Kode AI** | *Vibe coding* tanpa arah, rentan halusinasi & regresi. | **Spec-Driven**: Wajib PRD $ightarrow$ Tech Plan $ightarrow$ Dependency Tasks $ightarrow$ Automated Tests $\ge 80\%$. |
+| **Kolaborasi AI** | 1 AI serabutan mengerjakan segalanya. | **12 Subagent Spesialis** dengan batasan peran ketat (*strict boundaries*). |
+
+---
+
+## 🧭 Spec-Driven Development (SDD) Lifecycle
+
+Setiap fitur yang Anda minta akan diproses melalui alur terstandarisasi:
+
+```text
+1. User Idea / Feature Request
+             ↓
+2. [03-product-manager]   → Menghasilkan PRD di `.ai/specs/features/[feature].md`
+             ↓
+3. Human Spec Approval     → Verifikasi Scope (In/Out of scope) & Acceptance Criteria
+             ↓
+4. [04-systems-architect] → Menghasilkan Tech Plan di `.ai/plans/[feature]-plan.md` (NO CODE)
+             ↓
+5. Task Decomposition     → Menghasilkan `.ai/tasks/[feature]-tasks.md` (Dependency-Ordered)
+             ↓
+6. Human Plan Approval    → Verifikasi Kontrak Zod/API & Urutan Task
+             ↓
+7. [08-db / 05-be / 06-fe]→ Implementasi per batch (1-3 task) + Unit/Component Tests (>=80%)
+             ↓
+8. [09-qa-security-auditor]→ Audit diff vs PRD + OWASP Check + Playwright E2E (`e2e/**`)
+             ↓
+9. Human Verification    → Konfirmasi hasil & Acceptance Criteria terpenuhi
+             ↓
+10. Sync State & Memory  → Update `.ai/project-state.md` & `MEMORY.md`
+```
 
 ---
 
@@ -36,74 +61,78 @@ Boilerplate ini adalah adaptive AI engineering harness untuk memulai aplikasi we
 
 ```text
 my-project/
-├── .agents/                           # 🚀 Google Antigravity CLI Native Directory
+├── .agents/                           # 🚀 Google Antigravity Native Directory
 │   ├── agents/                        # 12 Subagent Roles (.agents/agents/<name>.md)
-│   └── skills/                        # 12 Skills Procedures (.agents/skills/<folder>/SKILL.md)
-├── .claude/                           # 🚀 Claude Code CLI Native Directory
-│   ├── agents -> ../.agents/agents    # Symlink to Antigravity agents
-│   └── skills -> ../.agents/skills    # Symlink to Antigravity skills
-├── .ai/                               # Vendor-neutral SDD artifacts
-│   ├── specs/features/                # Approved feature specifications
-│   ├── plans/                         # Technical plans with resolved profile
-│   ├── tasks/                         # Dependency-ordered implementation tasks
-│   ├── decisions/                     # Architecture Decision Records
-│   └── project-state.md               # Active short-term project state
-├── AGENTS.md                          # Antigravity Root Instructions
-├── CLAUDE.md                          # Claude Code Root Instructions
-├── ARCHITECTURE.md                    # System Architecture Specification
-├── STACK.md                           # Tech Stack Specifications & Selection Rules
-├── CODING_RULES.md                    # Universal Coding Rules & Guardrails
-├── WORKFLOW.md                        # Git Commit & Dev Workflow
-├── MEMORY.md                          # Shared Active Knowledge Bank (Auto-Managed)
+│   └── skills/                        # 12 Procedural Skills (.agents/skills/<folder>/SKILL.md)
+├── .claude/                           # 🚀 Claude Code Native Directory (Symlinked)
+│   ├── agents -> ../.agents/agents    
+│   └── skills -> ../.agents/skills    
+├── .ai/                               # 📁 Spec-Driven Development (SDD) Artifacts
+│   ├── specs/features/                # PRD & Feature Specifications
+│   ├── plans/                         # Technical Architecture & API Plans
+│   ├── tasks/                         # Dependency-Ordered Task Matrix
+│   ├── decisions/                     # Architecture Decision Records (ADRs)
+│   └── project-state.md               # Real-time Short-term Sprint Tracker
+├── AGENTS.md                          # Universal Agent Instructions & Routing (Antigravity)
+├── CLAUDE.md                          # Universal Agent Instructions & Routing (Claude Code)
+├── ARCHITECTURE.md                    # System Architecture Patterns & Data Flow
+├── STACK.md                           # Supported Stack Specifications & Selection Rules
+├── CODING_RULES.md                    # Strict Rules (Zero any, OWASP Top 10, Coverage >=80%)
+├── WORKFLOW.md                        # SDD Pipeline, Task Tiers & Definition of Done
+├── MEMORY.md                          # Persistent Long-term Knowledge Bank (Auto-Managed)
 ├── .gitignore                         # Production Git Ignore Rules
 └── scratch/                           # 🧪 Isolated Sandbox for AI Experiments (Git-Ignored)
 ```
 
 ---
 
-## 🚀 Quick Start (Cara Pakai untuk Proyek Baru)
+## 🤖 Tim 12 Master Subagents
 
-### 1. Clone atau Copy Boilerplate Ini
+| Subagent | Role & Strict Boundaries | Output Utama |
+| :--- | :--- | :--- |
+| `01-ui-ux-designer` | Merancang visual design system, token warna HSL/OKLCH, Tailwind utility patterns. | UI Design Tokens & Components |
+| `02-code-reviewer` | Audit strict type-safety, memory leaks, dan arsitektur (*Review Only*). | Code Audit Report |
+| `03-product-manager` | Menerjemahkan kebutuhan bisnis ke Technical PRD (**Dilarang menulis kode**). | `.ai/specs/features/*.md` |
+| `04-systems-architect` | Merancang DB ERD, Zod Contracts, dan Task Matrix (**Dilarang menulis kode produksi**). | `.ai/plans/*.md` & `.ai/tasks/*.md` |
+| `05-backend-engineer` | Implementasi Hono.js routes, service layer, dan Vitest unit tests ($\ge 80\%$). | Backend Code & Tests |
+| `06-frontend-engineer` | Implementasi React, TanStack, Tailwind UI, dan Vitest component tests ($\ge 80\%$). | Frontend Code & Tests |
+| `07-fullstack-engineer` | Integrasi Hono RPC Client antar-layer untuk fitur tightly coupled. | Fullstack Integration |
+| `08-database-specialist` | Schema Drizzle ORM, Drizzle Kit migrations, indexing, dan optimasi SQL. | DB Schema & Migrations |
+| `09-qa-security-auditor` | Audit OWASP Top 10, diff vs PRD, dan Playwright E2E (*Hanya menulis `e2e/**`*). | E2E Tests & Security Sign-off |
+| `10-seo-specialist` | Konfigurasi Dynamic Meta Tags, OpenGraph, Canonical URLs, dan JSON-LD. | SEO Schemas |
+| `11-a11y-specialist` | Verifikasi kepatuhan aksesibilitas WCAG 2.1 AA & ARIA attributes. | A11y Audit & Fixes |
+| `12-devops-engineer` | Multi-stage Dockerfile, GitHub Actions CI/CD pipeline, dan deployment profiles. | CI/CD & Deploy Config |
+
+---
+
+## 🚀 Cara Menggunakan untuk Proyek Baru
+
+### 1. Clone Repositori
 ```bash
-git clone https://github.com/mfaridzia/ai-fullstack-boilerplate.git my-new-app
-cd my-new-app
+git clone https://github.com/mfaridzia/ai-fullstack-boilerplate.git my-awesome-app
+cd my-awesome-app
+rm -rf .git && git init
 ```
 
-### 2. Mulai Koding Bersama AI CLI Pilihan Kamu
-Jalankan CLI pilihan kamu:
-- **Google Antigravity**:
+### 2. Buka dengan AI Coding CLI
+* **Google Antigravity**:
   ```bash
   agy
   ```
-- **Claude Code**:
+* **Claude Code**:
   ```bash
   claude
   ```
 
-### 3. Berikan Prompt Fitur Pertama Kamu
-Contoh prompt:
-> *"Tolong buatkan MVP SaaS Dashboard. Saat project intake bantu saya memilih coupled/decoupled, runtime, package manager, dan database; catat keputusan tersebut sebelum membuat PRD dan implementation plan. Jangan coding sebelum approval gate."*
+### 3. Lempar Ide Fitur Pertama Anda
+Cukup berikan ide bisnis Anda ke AI Utama (Orchestrator):
+> *"Saya mau membuat MVP SaaS Point of Sale (POS) untuk kedai kopi. Di tahap awal ini, saya butuh fitur Kasir: memilih menu katalog, memilih varian/add-on, kalkulasi pajak, dan bayar QRIS. Tolong proses fitur ini lewat Spec-Driven Development."*
 
-AI akan secara otomatis membaca arsitektur, me-launch subagent yang sesuai, mengeksekusi skill baku, dan memperbarui progress di `MEMORY.md`!
-
----
-
-## 🤖 Tim 12 Master Subagents
-
-| Subagent | Description |
-| :--- | :--- |
-| `01-ui-ux-designer` | Merancang palet warna HSL, Tailwind Glassmorphism, Google Fonts, & micro-animations. |
-| `02-code-reviewer` | Meninjau type-safety, memory leaks, silent errors, & refactoring. |
-| `03-product-manager` | Menerjemahkan user request menjadi User Stories & Acceptance Criteria. |
-| `04-systems-architect` | Mendesain DB Schema Drizzle, API Contracts, & System Architecture. |
-| `05-backend-engineer` | Mengimplementasikan Hono.js routes, Zod validation, & Drizzle queries. |
-| `06-frontend-engineer` | Mengimplementasikan React components, TanStack Router/Query, & Tailwind. |
-| `07-fullstack-engineer` | Menghubungkan Backend & Frontend via Hono RPC Client. |
-| `08-database-specialist` | Mengelola Drizzle Kit migrations, indexing, & SQL optimization. |
-| `09-qa-security-auditor` | Review implementation dan audit OWASP; hanya menulis `e2e/**`. |
-| `10-seo-specialist` | Optimasi Meta Tags, OpenGraph, Canonical Links, & JSON-LD. |
-| `11-a11y-specialist` | Memastikan kepatuhan WCAG 2.1 AA, ARIA attributes, & keyboard navigation. |
-| `12-devops-engineer` | Multi-stage Dockerfile, GitHub Actions CI/CD, & Vercel/Fly.io deployment. |
+AI akan secara otomatis:
+1. Memanggil **PM** $ightarrow$ Membuat PRD di `.ai/specs/features/pos-cashier.md`.
+2. Memanggil **Architect** $ightarrow$ Merancang DB/API di `.ai/plans/pos-cashier-plan.md` & task di `.ai/tasks/pos-cashier-tasks.md`.
+3. Menunggu approval Anda $ightarrow$ Mengeksekusi kode secara bertahap (DB $ightarrow$ BE $ightarrow$ FE $ightarrow$ QA).
+4. Menjalankan seluruh test suite dan memperbarui `MEMORY.md`.
 
 ---
 
@@ -115,5 +144,4 @@ AI akan secara otomatis membaca arsitektur, me-launch subagent yang sesuai, meng
 ---
 
 ## 📄 License
-
-Belum ada lisensi distribusi yang dipilih. Tambahkan file `LICENSE` sebelum mempublikasikan atau mendistribusikan boilerplate ini.
+Tambahkan file `LICENSE` sesuai kebutuhan lisensi distribusi proyek Anda (misal: MIT License).
