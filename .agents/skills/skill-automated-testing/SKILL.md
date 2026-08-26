@@ -17,16 +17,18 @@ Gunakan skill ini setiap kali membuat atau memodifikasi service, util function, 
 
 ## 2. Struktur File & Penempatan Test (Strict Co-location Rule)
 - **WAJIB Co-location**: Simpan file unit/component test **persis berdampingan** dengan file implementasinya:
-  - Backend Service: `src/modules/auth/auth.service.ts` -> `src/modules/auth/auth.service.test.ts`
-  - Backend Route: `src/modules/auth/auth.route.ts` -> `src/modules/auth/auth.route.test.ts`
-  - UI Component: `src/components/ui/button.tsx` -> `src/components/ui/button.test.tsx`
-  - Util / Helper: `src/utils/format.ts` -> `src/utils/format.test.ts`
+  - Service: `<module-root>/auth.service.ts` -> `<module-root>/auth.service.test.ts`
+  - Route: `<module-root>/auth.route.ts` -> `<module-root>/auth.route.test.ts`
+  - UI: `<ui-root>/button.tsx` -> `<ui-root>/button.test.tsx`
+  - Util: `<utils-root>/format.ts` -> `<utils-root>/format.test.ts`
 - Gunakan ekstensi `*.test.ts` atau `*.test.tsx`.
-- **Dilarang** membuat folder test unit terpisah di luar `src/` (misal: `tests/unit/`) agar domain encapsulation tetap utuh.
+- **Dilarang** membuat folder test unit terpisah dari implementation module (misal: root `tests/unit/`) agar domain encapsulation tetap utuh. Lokasi implementation root mengikuti profile aktif.
 
 ---
 
 ## 3. Pola Pengujian (Test Patterns)
+
+Contoh berikut menunjukkan pola test; sesuaikan import alias dan module root dengan approved plan.
 
 ### A. Testing Service / Business Logic Murni
 ```ts
@@ -94,15 +96,7 @@ describe("<Button />", () => {
 ---
 
 ## 4. Eksekusi & Audit Coverage
-1. Jalankan test suite:
-   ```bash
-   bun test
-   # atau
-   npx vitest run
-   ```
-2. Jalankan test dengan coverage report:
-   ```bash
-   npx vitest run --coverage
-   ```
+1. Resolve package manager dari profile aktif, lalu jalankan project script `test`.
+2. Jalankan project script `test:coverage`; script tersebut harus memakai konfigurasi Vitest yang meng-enforce threshold.
 3. Jika coverage di bawah target (80% / 90%), identifikasi missing lines/branches pada report lalu tambahkan test case untuk edge-cases tersebut.
 4. **DILARANG keras menggunakan `test.skip` atau mengomentari test yang gagal**.

@@ -9,3 +9,4 @@ description: "Prosedur audit keamanan API berdasarkan standar OWASP Top 10."
 2. Verifikasi CORS middleware terkonfigurasi dengan domain yang diizinkan saja.
 3. Verifikasi hashing password menggunakan `argon2` atau `bcrypt`.
 4. Pastikan Rate Limiting middleware terpasang pada route Auth/Login.
+5. Untuk outbound URL dari input user, verifikasi allowlist protocol/host, blok private/loopback/link-local/metadata destinations setelah DNS resolution, dan validasi ulang setiap redirect.

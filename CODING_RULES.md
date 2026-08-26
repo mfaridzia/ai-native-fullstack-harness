@@ -3,8 +3,10 @@
 ## 0. Automatic Subagent & Skill Routing
 AI Assistant harus secara otomatis me-launch Subagent yang sesuai dari `.agents/agents/` untuk tugas kompleks dan menerapkan prosedur yang relevan dari `.agents/skills/` berdasarkan niat (intent) dari prompt pengguna tanpa perlu dipanggil secara eksplisit.
 
+Sebelum menulis kode, agent WAJIB mengikuti precedence di `WORKFLOW.md` dan ADR-005: project state/approved feature plan -> Accepted ADR -> `MEMORY.md` -> default `STACK.md`. Struktur folder, runtime command, package manager, dan database tooling harus mengikuti profile tersebut dan tidak boleh dicampur lintas profile.
+
 ## 1. Environment Variables & Secret Validation
-Dilarang mengakses `process.env` atau `import.meta.env` secara mentah. Semua environment variables WAJIB di-validate menggunakan Zod Schema di `src/env.ts` saat startup time.
+Akses mentah ke `process.env` atau `import.meta.env` hanya diizinkan di environment adapter tervalidasi. Untuk aplikasi unified/browser-capable, pisahkan server-only env dari public/client env dan gunakan prefix publik sesuai framework. Lokasi adapter mengikuti architecture profile aktif.
 
 ## 2. Scratchpad Isolation Guardrail
 Dilarang mencoba-coba library baru atau menulis script debugging eksperimental langsung di dalam `src/`. Semua eksperimen WAJIB dilakukan di folder `scratch/` terlebih dahulu sebelum di-refactor ke codebase utama.
@@ -84,7 +86,7 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
 - **No Skipping or Disabling Tests**:
   - Dilarang keras mengomentari (*comment-out*), menghapus, atau mengabaikan (`test.skip`, `it.skip`) test yang failing untuk meloloskan build/CI tanpa investigasi akar masalah.
 - **Pre-Commit / Pre-PR Test Verification**:
-  - Seluruh test suite (`bun test` / `vitest run` & `playwright test`) WAJIB passing 100% dan memenuhi target coverage sebelum kode dianggap selesai dan di-commit.
+  - Jalankan script typecheck, lint, unit/integration coverage, E2E yang relevan, dan build menggunakan package manager dari profile aktif. Seluruh gate WAJIB passing dan memenuhi target coverage sebelum kode dianggap selesai.
 
 ## 7. Zero-Trust Security & OWASP Top 10 Defensive Guardrails
 - **Authentication & Password Security**:
@@ -102,12 +104,12 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
   - Terapkan **CSRF Protection Middleware** (Anti-CSRF Tokens atau SameSite Cookies) untuk semua state-changing request (POST, PUT, DELETE, PATCH).
   - CORS WAJIB dikunci ke domain spesifik yang di-whitelisted via `.env`. **DILARANG keras menggunakan `Access-Control-Allow-Origin: *` di production**.
 - **SSRF (Server-Side Request Forgery) & Input Sanitization**:
-  - Jika API melakukan fetching ke URL eksternal berdasarkan input user, WAJIB memvalidasi URL terhadap IP Private / Loopback Whitelist (`127.0.0.1`, `10.0.0.0/8`, `192.168.0.0/16`, `metadata.google.internal`) untuk mencegah SSRF & Cloud Metadata Leak.
+  - Jika API melakukan fetching ke URL eksternal berdasarkan input user, gunakan allowlist host/protocol yang memang diizinkan. Blokir loopback, private, link-local, multicast, dan cloud metadata destinations (termasuk IPv4/IPv6) setelah DNS resolution; validasi ulang setiap redirect untuk mencegah DNS rebinding dan metadata leak.
 - **Rate Limiting & Anti-Brute Force / DoS**:
   - Terapkan Rate Limiting (misal: Hono Rate Limiter / Redis Slide Window) pada **semua endpoint public** (max 100 req/min) dan **endpoint sensitif Auth/Payment** (max 5-10 req/min) untuk mencegah Brute-Force & Credential Stuffing.
 - **Secret Management & Zero Hardcoded Credentials**:
   - DILARANG keras meletakkan API Keys, DB Passwords, JWT Secrets, atau Private Keys di dalam source code.
-  - Semua secret WAJIB divalidasi via Zod Schema di `src/env.ts` dan dipindai secara otomatis sebelum commit (`gitleaks` / pre-commit hook).
+  - Semua secret WAJIB divalidasi melalui server-only environment adapter pada lokasi dari profile aktif dan dipindai otomatis sebelum commit (`gitleaks` / pre-commit hook). Jika ada browser bundle, public/client env harus memakai adapter terpisah.
 - **Audit Logging & Error Masking**:
   - Detail internal stack trace (misal: DB error message, file paths) **DILARANG dibocorkan ke HTTP Client**. Kembalikan pesan error generik (misal: "Internal Server Error") ke client, dan catat detail traceback asli HANYA di server log terenkripsi (Sentry / Structured JSON Log).
 

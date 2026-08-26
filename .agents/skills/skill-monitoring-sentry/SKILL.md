@@ -9,8 +9,14 @@ description: "Prosedur integrasi error tracking Sentry & structured JSON logging
 2. Buat error handler middleware Hono untuk menangkap unhandled exceptions dan mengirimnya ke Sentry:
    ```ts
    app.onError((err, c) => {
-     Sentry.captureException(err);
-     return c.json({ success: false, data: null, error: { code: 'INTERNAL_ERROR', message: err.message } }, 500);
+     const requestId = c.get('requestId');
+     Sentry.captureException(err, { tags: { requestId } });
+     return c.json({
+       success: false,
+       data: null,
+       error: { code: 'INTERNAL_ERROR', message: 'Internal Server Error' },
+     }, 500);
    });
    ```
-3. Gunakan structured JSON logger (`Pino.js`) untuk memudahkan query log di cloud providers.
+3. Gunakan structured JSON logger dengan request ID dan redaction untuk secret, token, cookie, authorization header, serta PII sensitif.
+4. Verifikasi response client tidak mengandung stack trace atau internal error detail dan event server tetap dapat dikorelasikan melalui request ID.

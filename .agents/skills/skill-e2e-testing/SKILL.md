@@ -7,4 +7,5 @@ description: "Prosedur pembuatan dan eksekusi End-to-End Testing menggunakan Pla
 
 1. Buat file tes baru di `e2e/[feature].spec.ts`.
 2. Tulis alur navigasi user (Buka halaman -> Isi Form -> Klik Submit -> Assert UI Result).
-3. Jalankan tes menggunakan `npx playwright test`.
+3. Jalankan script Playwright menggunakan package manager dari profile aktif dan simpan artifacts hanya sesuai konfigurasi project.
+4. Laporkan skenario, hasil, dan artifact kegagalan; jangan melewati test yang gagal.

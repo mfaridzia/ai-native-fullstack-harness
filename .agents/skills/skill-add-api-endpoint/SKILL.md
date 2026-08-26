@@ -5,8 +5,9 @@ description: "Prosedur menambahkan endpoint API baru dengan Hono.js, Zod validat
 
 # Skill Procedure: Adding New Type-Safe API Endpoint
 
-1. Buat Zod Schema validator di `src/schemas/[feature].ts`.
-2. Buat Hono Route Handler di `src/routes/[feature].ts`.
-3. Pasang middleware Zod Validator pada request: `zValidator('json', schema)`.
-4. Daftarkan route di file server utama (`src/index.ts`).
-5. Buat unit test sederhana di `tests/[feature].test.ts` menggunakan Vitest.
+1. Baca profile/plan aktif untuk menentukan backend root dan pola modular coupled atau decoupled. Jangan membuat layout baru yang bertentangan dengan keputusan tersebut.
+2. Implementasikan Zod request/response schema di dalam feature module yang ditentukan plan.
+3. Implementasikan Hono route, service, dan data-access sesuai separation of concerns; pasang `zValidator` pada request.
+4. Daftarkan sub-router pada composition root dari profile aktif.
+5. Tulis unit/integration test berdampingan dengan implementasi (`*.test.ts`); hanya E2E yang ditempatkan di root `e2e/`.
+6. Jalankan lint, typecheck, test, dan coverage melalui package manager aktif. Berhenti dan laporkan jika kontrak atau profile belum diputuskan.

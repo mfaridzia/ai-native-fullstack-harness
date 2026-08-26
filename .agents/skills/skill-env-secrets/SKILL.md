@@ -5,8 +5,9 @@ description: "Prosedur validasi environment variables & secret management menggu
 
 # Skill Procedure: Type-Safe Environment Variables Validation
 
-1. Buat file `src/env.ts`.
-2. Definikan Zod Schema untuk seluruh variabel env:
+1. Baca architecture profile aktif untuk menentukan server dan client environment boundaries.
+2. Buat server-only environment adapter pada server root yang dipilih. Jika ada browser bundle, buat adapter public/client terpisah dan hanya izinkan variabel dengan prefix publik framework.
+3. Definikan Zod Schema untuk variabel server:
    ```ts
    import { z } from 'zod';
    export const envSchema = z.object({
@@ -16,4 +17,5 @@ description: "Prosedur validasi environment variables & secret management menggu
    });
    export const env = envSchema.parse(process.env);
    ```
-3. Import `env` dari `src/env.ts` di seluruh aplikasi. Aplikasi akan langsung crash dengan pesan error jelas jika ada env variable yang hilang saat disatukan!
+4. Hanya adapter tervalidasi yang boleh membaca `process.env` atau `import.meta.env` secara langsung. Jangan pernah mengimpor adapter server ke client bundle.
+5. Tambahkan `.env.example` tanpa nilai secret dan verifikasi aplikasi gagal saat startup jika konfigurasi wajib tidak valid.
