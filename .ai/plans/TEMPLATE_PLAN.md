@@ -3,6 +3,7 @@
 > **Spec Reference**: `../specs/features/[feature-name].md`  
 > **Author (Architect)**: 04-systems-architect  
 > **Status**: [Draft / Ready for Implementation]  
+> **Approval**: [Pending / Approved by <name/date>]
 > ⚠️ **STRICT RULE**: Dokumen ini hanya berisi rancangan arsitektur teknis & kontrak. Architect DILARANG menulis kode produksi di luar dokumen ini.
 
 ---
@@ -71,3 +72,21 @@ Urutan pengerjaan wajib mengikuti hierarki dependensi bottom-up:
 - **Frontend Root**: [Path resolved for this project]
 - **Schema / Contract Root**: [Path resolved for this project]
 - **Decision References**: [Accepted ADR paths]
+
+## 7. Product & Design Context Plan (Frontend Scope Only)
+
+- **Surface Mode**: [Operate / Persuade / Read / Experience]
+- **Default Design Authority**: Impeccable
+- **Art Direction Specialist**: [Taste for approved Persuade/Experience marketing surface / None]
+- **Motion Specialist**: [Emil skills when justified / None]
+- **PRODUCT.md State**: [Existing and confirmed / Create through Impeccable init after plan approval]
+- **DESIGN.md State**: [Existing incumbent authority / Document incumbent system / Create at greenfield finish review]
+- **Visual Evidence to Preserve**: [Tokens, components, assets, screenshots, approved references]
+- **Visual Direction Gate**: [Required for new/replacement world / Not required for inherited local extension]
+- **Finish Review**: [Rendered desktop/mobile inspection, Impeccable critique/audit/polish, motion review if applicable]
+
+## 8. Architecture & Plan Approval Gate
+- [ ] PRD status is Approved.
+- [ ] Architecture, runtime/package manager, database, and source roots are resolved consistently.
+- [ ] Contracts, task order, design-context prerequisites, and approval checkpoints are explicit.
+- [ ] Human approval is recorded before production implementation begins.

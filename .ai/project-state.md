@@ -19,9 +19,13 @@
 - [x] Initialized Spec-Driven Multi-Agent Directory `.ai/`
 - [x] Aligned adaptive profile resolution across rules, agents, skills, and templates
 - [x] Ready for feature intake
+- [x] Defined staged product intake, PRD approval, architecture approval, and frontend visual-direction gates
+- [x] Added a pinned, project-local bootstrap for Impeccable, Taste marketing, and Emil motion skills without vendoring upstream files
+- [x] Replaced generic glassmorphism/Bento defaults with explicit surface-based design routing
 
 ## 🚧 Active Blockers & Questions
 - None.
 
 ## 📌 Next Up
 - [ ] Ingest first feature request via `03-product-manager`.
+- [ ] During the first real product intake, create project-specific `PRODUCT.md`; create or document `DESIGN.md` according to ADR-006.

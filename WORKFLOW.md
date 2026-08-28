@@ -9,24 +9,60 @@ Dokumen ini adalah panduan standar alur pengembangan software berbasis AI Agent 
 ```text
 1. User Idea / Feature Request
              ↓
-2. [03-product-manager]   → Menghasilkan PRD di `.ai/specs/features/[feature].md`
+2. Product Intake [03-product-manager]
+   Explore repo + ask material gaps + draft `.ai/specs/features/[feature].md`
              ↓
-3. Human Spec Approval     → Scope, acceptance criteria, dan constraint disetujui
+3. HUMAN GATE: PRD Approval
+   Approve users, scope, constraints, acceptance criteria, out-of-scope
              ↓
-4. [04-systems-architect] → Menghasilkan Tech Plan di `.ai/plans/[feature]-plan.md` (NO CODE)
+4. Architecture Intake [04-systems-architect]
+   Resolve profile + ADR + `.ai/plans/[feature]-plan.md` + `.ai/tasks/[feature]-tasks.md`
              ↓
-5. Task Decomposition     → Menghasilkan `.ai/tasks/[feature]-tasks.md` (Dependency-Ordered)
+5. HUMAN GATE: Architecture & Plan Approval
+   Approve runtime, package manager, database, roots, contracts, and task order
              ↓
-6. Human Plan Approval    → Profile, kontrak, task order, dan checkpoint disetujui
+6. Product & Design Context (when frontend is in scope)
+   Impeccable init -> `PRODUCT.md`; classify surface and prepare direction
              ↓
-7. [08-db / 05-be / 06-fe]→ Implementasi 1-3 task per batch + tests
+7. HUMAN GATE: Visual Direction Approval (new/replacement visual world only)
+   Product UI: Impeccable | Marketing: Taste art direction | Motion: Emil specialist
              ↓
-8. [09-qa-security-auditor]→ Audit diff + OWASP; hanya boleh menulis `e2e/**`
+8. [08-db / 05-be / 06-fe] -> Implement 1-3 dependency-ordered tasks + tests
              ↓
-9. Human Verification    → Konfirmasi hasil & Acceptance Criteria
+9. Finish Review
+   Impeccable critique/audit/polish + motion review when applicable + record `DESIGN.md`
              ↓
-10. Sync State & Memory  → Update `.ai/project-state.md` & `MEMORY.md`
+10. [09-qa-security-auditor] -> Diff audit + OWASP; may write only `e2e/**`
+             ↓
+11. Human Verification -> Confirm render, behavior, and Acceptance Criteria
+             ↓
+12. Sync State & Memory -> Update `.ai/project-state.md` & `MEMORY.md`
 ```
+
+## 🧭 Intake, Context, and Design Artifact Ownership
+
+- The first prompt starts intake. It does not bypass approval gates or authorize production code.
+- The PM may infer from repository evidence, but must confirm material assumptions before marking a PRD Approved.
+- `PRODUCT.md` is created per initialized product project, after PRD approval and before new visual work. It contains durable product truth, not feature scope or visual recipes.
+- Feature PRDs remain the source of truth for feature-specific behavior and acceptance criteria.
+- `DESIGN.md` is created per initialized product project:
+  - Existing coherent UI: document the incumbent system before substantial new design work.
+  - Greenfield/new visual world: create it during finish review from the approved, implemented surface.
+  - Local feature extension: inherit the established system; update `DESIGN.md` only for an approved durable system change.
+- Do not ship generic placeholder `PRODUCT.md` or `DESIGN.md` files in this meta-boilerplate.
+
+## 🎨 Frontend Surface Routing
+
+| Surface mode | Examples | Visual authority | Specialist |
+| :--- | :--- | :--- | :--- |
+| **Operate** | Dashboard, app, admin, settings, forms, tables | Impeccable only | Emil for justified motion |
+| **Persuade** | Landing, pricing, campaign, public marketing | Taste art direction within Impeccable context/quality gates | Emil for justified motion |
+| **Read** | Docs, articles, guides, help | Impeccable | Taste only when explicitly approved |
+| **Experience** | Portfolio, gallery, showcase | Taste art direction within Impeccable context/quality gates | Emil for justified motion |
+
+Never apply Taste to dense product UI. Never let Emil change the approved visual system. Never let two skills act as competing design authorities.
+
+For Persuade/Experience marketing work, use exactly one direction round: Impeccable establishes missing product context, Taste proposes the art direction, the human approves it, and Impeccable later treats it as pinned input for finish review. Do not ask Impeccable to generate a second visual world. When Emil is installed, it is the motion authority; Impeccable audits motion only as part of overall UI quality.
 
 ---
 
@@ -66,9 +102,9 @@ Layer 2: Backend Logic & Unit Tests (05-backend-engineer)
    ↓
 Layer 3: Frontend Data Client & State (06-frontend-engineer / 07-fullstack)
    ↓
-Layer 4: Frontend UI, Forms & Interactions (06-frontend-engineer)
+Layer 4: Approved Frontend Direction, UI, Forms & Interactions (01-ui-ux / 06-frontend)
    ↓
-Layer 5: QA, Security Diff Audit & E2E Tests (09-qa-security-auditor)
+Layer 5: Design Finish Review + QA, Security Diff Audit & E2E Tests
 ```
 
 ---

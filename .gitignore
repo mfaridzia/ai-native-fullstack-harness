@@ -14,6 +14,16 @@ build/
 scratch/
 .ai/scratch/
 
+# Generated third-party agent skills (restore with setup-agent-skills.mjs)
+.agents/skills/impeccable/
+.agents/skills/design-taste-frontend/
+.agents/skills/animate/
+.agents/skills/review-animations/
+.agents/skills/improve-animations/
+.agents/skills/find-animation-opportunities/
+.agents/skills/animation-vocabulary/
+.agents/skills/.vendor-state.json
+
 # Logs & OS Junk
 *.log
 npm-debug.log*

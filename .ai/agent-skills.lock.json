@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "generatedRoot": ".agents/skills",
+  "skills": [
+    {
+      "name": "impeccable",
+      "repo": "pbakaus/impeccable",
+      "ref": "31dcc687c66ed0037dd4ebfe3ba474e2b8a7b06b",
+      "path": "plugin/skills/impeccable"
+    },
+    {
+      "name": "design-taste-frontend",
+      "repo": "Leonxlnx/taste-skill",
+      "ref": "ccbc15639c97057cbfcf32ecebc38ef716e4bb37",
+      "path": "skills/taste-skill"
+    },
+    {
+      "name": "animate",
+      "repo": "emilkowalski/skills",
+      "ref": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "path": "skills/animate"
+    },
+    {
+      "name": "review-animations",
+      "repo": "emilkowalski/skills",
+      "ref": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "path": "skills/review-animations"
+    },
+    {
+      "name": "improve-animations",
+      "repo": "emilkowalski/skills",
+      "ref": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "path": "skills/improve-animations"
+    },
+    {
+      "name": "find-animation-opportunities",
+      "repo": "emilkowalski/skills",
+      "ref": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "path": "skills/find-animation-opportunities"
+    },
+    {
+      "name": "animation-vocabulary",
+      "repo": "emilkowalski/skills",
+      "ref": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "path": "skills/animation-vocabulary"
+    }
+  ]
+}

@@ -49,6 +49,11 @@ Dilarang mencoba-coba library baru atau menulis script debugging eksperimental l
     ```
 
 ## 5. Frontend Rules & Architecture (Component Modularity & A11y)
+- **Design Context & Skill Routing**:
+  - Follow the design precedence and surface routing in `AGENTS.md`/`WORKFLOW.md` before creating or redesigning UI.
+  - Impeccable is the default design authority. Taste Skill is restricted to approved landing, marketing, campaign, and portfolio art direction. Emil skills are restricted to motion and interaction decisions.
+  - Never default to glassmorphism, bento grids, gradients, card-heavy layouts, a font, a radius scale, or decorative motion without evidence from the brief, `PRODUCT.md`, `DESIGN.md`, or approved visual direction.
+  - Do not create a competing visual language inside an established surface. Reuse tokens and components unless a redesign or durable design-system change is explicitly approved.
 - **Component Line Limit & Decomposition Rule**:
   - Ukuran file komponen React **TIDAK BOLEH melebihi 300 baris kode**.
   - Jika komponen melebihi 300 baris atau memiliki multiple sub-sections (misal: Form Modal, Complex Table Row, Filter Sidebar), **WAJIB di-breakdown** menjadi komponen-komponen kecil terpisah.
